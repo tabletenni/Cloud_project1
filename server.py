@@ -50,15 +50,12 @@ while True:
     
     if decrypted_message.strip().lower() == 'exit':
         print("Client has closed the connection.")
-        serverSocket.close()
    
     
-    print(f"Received from client (encrypted): {encrypted_message}")
-    print(f"Decrypted message : {decrypted_message}")
+    print(f"Received from client : {decrypt_message}")
+    print(f"Encrypted message : {encrypted_message}")
 
     response = input("Enter your response: ")
     encrypted_response = encrypt_message(response)
     connection_socket.send(encrypted_response.encode())
 
-connection_socket.close()
-serverSocket.close()

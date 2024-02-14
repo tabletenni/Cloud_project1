@@ -1,6 +1,6 @@
 from socket import *
 
-serverName = '10.31.0.100'
+serverName = '192.168.1.42'
 serverPort = 12000
 
 key = 4
@@ -46,18 +46,18 @@ print("Connected to server. 200, 'OK'")
 while True:
     message = input("Enter your message (type 'exit' to close): ")
 
-    client_socket.send(message.encode())
+    encrypted_message = encrypt_message(message)
+    client_socket.send(encrypted_message.encode())
 
     if message.lower() == 'exit':
         message = "Closing connection..."
         print("Closing connection...")
-        client_socket.close()
         break
 
     encrypted_response = client_socket.recv(1024).decode()
 
     response = decrypt_message(encrypted_response)
-    print(f"Received from server (encrypted): {encrypted_response}")
-    print(f"Decrypted response: {response}")
+    print(f"Received from server (encrypted): {decrypt_message}")
+    print(f"Encrypted response: {encrypted_response}")
 
 client_socket.close()
